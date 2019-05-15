@@ -24,6 +24,7 @@ public class WorkHoursManagementAppApplication {
 	}@Bean
 	public CommandLineRunner workHoursManagementApp(WorkdayRepository wRepository, PaycycleRepository pRepository, AccountRepository accountRepository) {
 		return (args) -> {
+			 /* Cmdrunner kommenteissa koska muuten postgres hajoaa kun siellä on jo nämä tiedot
 			
 			// Create users: admin/admin, user1/user1, user2/user2
 			log.info("Add users");
@@ -53,6 +54,7 @@ public class WorkHoursManagementAppApplication {
 			for (Workday workday : wRepository.findAll()) {
 				log.info(workday.toString());
 			}
+			*/
 
 		};
 	}

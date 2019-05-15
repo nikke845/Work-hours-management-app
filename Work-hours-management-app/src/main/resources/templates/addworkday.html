@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Workdaylist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Add Workday</h1>
+	<div>
+		<form th:object="${workday}" th:action="@{save}" action="#" method="post">
+			<label for="date">Date</label> <input type="text" id="fname"
+				th:field="*{date}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="workhours">Workhours</label> <input type="text" id="lname"
+				th:field="*{workhours}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="startingtime">Starting time</label> <input type="text" th:field="*{startingtime}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="endingtime">Ending time</label> <input type="text" th:field="*{endingtime}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<!-- <label for="owner">Owner</label> <input type="text" th:field="*{owner}" />
+			<div style="clear: both; display: block; height: 10px;"></div> -->
+			
+			
+			<!-- type="hidden" -->
+			<!--  <span th:="{#authentication.getPrincipal()}" th:field="*{owner}"></span>  -->
+			
+			<label for="name">Paycycle</label>
+			<select id="name" th:field="*{paycycle}">
+					<option th:each="paycycle:${paycycles}" th:value="${paycycle.paycycleid}" th:text="${paycycle.name}"></option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>

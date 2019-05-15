@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Paycyclelist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out"/>
+		</form>
+	<h1>Paycycles</h1>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Owner</th>
+		</tr>
+		<tr th:each="paycycle : ${paycycles}">
+			<td th:text="${paycycle.name}"></td>
+			<td th:text="${paycycle.owner}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/paycycle/delete/{id}(id=${paycycle.paycycleid})}">Delete</a></td>
+		</tr>
+	</table>
+	<a href="/addpaycycle">Add a paycycle</a>
+	<a href="/workdaylist">Back to workdaylist</a>
+</body>
+</html>

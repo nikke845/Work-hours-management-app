@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Workdaylist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out"/>
+		</form>
+	<h1>Workdays</h1>
+	<table>
+		<tr>
+			<th>Date</th>
+			<th>Workhours</th>
+			<th>Starting time</th>
+			<th>Ending time</th>
+			<th>Paycycle</th>
+			<th>Owner</th>
+		</tr>
+		<tr th:each="workday : ${workdays}">
+			<td th:text="${workday.date}"></td>
+			<td th:text="${workday.workhours}"></td>
+			<td th:text="${workday.startingtime}"></td>
+			<td th:text="${workday.endingtime}"></td>
+			<td th:text="${workday.paycycle.name}"></td>
+			<td th:text="${workday.owner}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${workday.id})}">Delete</a></td>
+		</tr>
+	</table>
+	<a href="/addworkday">Add a workday</a>
+	<a href="/addpaycycle">Add paycycle</a>
+	<a href="/paycyclelist">Go to paycyclelist</a>
+</body>
+</html>

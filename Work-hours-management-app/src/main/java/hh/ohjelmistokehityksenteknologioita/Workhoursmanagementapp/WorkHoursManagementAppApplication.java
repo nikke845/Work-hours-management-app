@@ -12,8 +12,8 @@ import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.Workda
 import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.WorkdayRepository;
 import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.Paycycle;
 import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.PaycycleRepository;
-import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.User;
-import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.UserRepository;
+import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.Account;
+import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.AccountRepository;
 
 @SpringBootApplication
 public class WorkHoursManagementAppApplication {
@@ -22,19 +22,19 @@ public class WorkHoursManagementAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WorkHoursManagementAppApplication.class, args);
 	}@Bean
-	public CommandLineRunner workHoursManagementApp(WorkdayRepository wRepository, PaycycleRepository pRepository, UserRepository userRepository) {
+	public CommandLineRunner workHoursManagementApp(WorkdayRepository wRepository, PaycycleRepository pRepository, AccountRepository accountRepository) {
 		return (args) -> {
 			
 			// Create users: admin/admin, user1/user1, user2/user2
 			log.info("Add users");
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			userRepository.save(new User("user1", encoder.encode("user1"), "user1@user.com","USER"));
-			userRepository.save(new User("user2", encoder.encode("user2"), "user2@user.com","USER"));
-			userRepository.save(new User("admin", encoder.encode("admin"), "admin@admin.com","ADMIN"));
+			accountRepository.save(new Account("user1", encoder.encode("user1"), "user1@user.com","USER"));
+			accountRepository.save(new Account("user2", encoder.encode("user2"), "user2@user.com","USER"));
+			accountRepository.save(new Account("admin", encoder.encode("admin"), "admin@admin.com","ADMIN"));
 			
 			log.info("Fetch all users");
-			for (User user : userRepository.findAll()) {
-				log.info(user.toString());
+			for (Account account : accountRepository.findAll()) {
+				log.info(account.toString());
 			}
 			
 			

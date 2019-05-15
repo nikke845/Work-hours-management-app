@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.SignupForm;
-import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.User;
-import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.UserRepository;
+import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.Account;
+import hh.ohjelmistokehityksenteknologioita.Workhoursmanagementapp.domain.AccountRepository;
 
 
 @Controller
 public class UserController {
 	@Autowired
-    private UserRepository repository; 
+    private AccountRepository repository; 
 	
     @RequestMapping(value = "signup")
     public String addStudent(Model model){
@@ -43,7 +43,7 @@ public class UserController {
 		    	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 		    	String hashPwd = bc.encode(pwd);
 	
-		    	User newUser = new User();
+		    	Account newUser = new Account();
 		    	newUser.setPasswordHash(hashPwd);
 		    	newUser.setUsername(signupForm.getUsername());
 		    	newUser.setEmail(signupForm.getEmail());
